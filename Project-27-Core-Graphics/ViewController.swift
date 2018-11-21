@@ -143,7 +143,24 @@ class ViewController: UIViewController {
     }
     
     private func drawImagesAndText() {
+        let renderer = UIGraphicsImageRenderer(size: rendererSize)
         
+        let img = renderer.image { (context) in
+            
+            let paragraphStyle = NSMutableParagraphStyle()
+            paragraphStyle.alignment = .center
+            
+            let attributes = [NSAttributedString.Key.font: UIFont(name: "HelveticaNeue-Thin", size: 22), NSAttributedString.Key.paragraphStyle: paragraphStyle]
+            
+            let text: NSString = "The best-laid schemes o'\nmice an' men gangaft agley"
+            text.draw(with: CGRect(x: 0, y: 32, width: rendererSize.width, height: 250), options: .usesLineFragmentOrigin, attributes: attributes, context: nil)
+            
+//            text.draw(in: CGRect(x: 0, y: 32, width: view.bounds.width, height: 250), withAttributes: attributes)
+            
+            let mouse = UIImage(named: "mouse")
+            mouse?.draw(at: CGPoint(x: (view.bounds.width / 2) - 100, y: 150))
+        }
+        imageView.image = img
     }
 
 }
